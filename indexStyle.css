@@ -1,12 +1,18 @@
-#top
+#main
 {
     background-color:#BCBEC0;
 }
-#bottom
+#bottom, #top
 {
+    color: white;
     background-color:#441244;
     height: 20%;
 }
+#bottom
+{
+    height: 5em;
+}
+
 
  #left-bttn,#right-bttn
 {
@@ -21,14 +27,14 @@
     padding: 0%;
 }
 
-body .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card
 {
     background-color:#F6F6F6;
     border: 0px;
     border-color:  #BCBEC0;
     opacity: .6;
 }
-body .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card:hover
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card:hover
 {
     background-color:#F6F6F6;
     border: 0px;
@@ -36,20 +42,20 @@ body .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card:hover
     opacity: 1;
 }
 
-body .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .ui.center.aligned.segment
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .ui.center.aligned.segment
 {
     background-color:#441244;
     color: #F6F6F6;
     margin: 0%;
     font-size: 1em;
 }
-body .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img
 {
     max-width: 17em;
     height: 24em;
 }
 
-body .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content
 {
     background-color:#9F9F9F ;
     border-color:  #BCBEC0;
@@ -58,21 +64,21 @@ body .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extr
     width: 100%;
 }
 
-body .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content .ui.two.attached.buttons .ui.green.button
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content .ui.two.attached.buttons .ui.green.button
 {
     background-color:#1C7D69;
     border-bottom-left-radius:1em;
     color: white;
 
 }
-body .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content .ui.two.attached.buttons .ui.red.button
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content .ui.two.attached.buttons .ui.red.button
 {
     background-color:#B51B09;
     color: white;
     border-top-right-radius:1em;
 }
 
-/*body .container .rectangle:hover
+/*main .container .rectangle:hover
 {
 
     width: 15em;

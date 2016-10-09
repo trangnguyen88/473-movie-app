@@ -5,16 +5,37 @@
     <script src="sliderAnimation.js" ></script>
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
     <script src="semantic/dist/semantic.min.js"></script>
-    <link href="indexStyle.css.css" rel="stylesheet" type="text/css">
+    <link href="indexStyle.css" rel="stylesheet" type="text/css">
     <!-- some hovering shit-->
-    
+
     <title>sandbox</title>
 </head>
-<body>
-    <div class="ui padded grid" id="top">
+<!--menu-->
+<header>
+    <div class="ui center aligned padded grid" id="top">
+        <div class="ui inverted secondary large menu">
+            <div class="header item">
+                <a  href="index.html">
+                    HOME
+                </a>
+            </div>
+            <a class="item" href="projFaq.html">
+                FAQ
+            </a>
+            <a class="item" href="projPriv.html">
+                PRIVACY
+            </a>
+            <a class="item" href="projCon.html">
+                CONTACT
+            </a>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="ui padded grid" id="main">
         <div class="sixteen center aligned wide column">
             <div class="ui padded grid">
-                <div class="three wide middle aligned content  column">
+                <div class="three wide middle aligned content column">
                     <div class="left-button">
                         <button class="massive ui button" id="left-bttn"><</button>
                     </div>
@@ -34,7 +55,9 @@
         </div>
         </div>
     </div>
+</main>
+<footer>
     <div class="ui padded grid" id="bottom">
     </div>
-</body>
+</footer>
 </html>
