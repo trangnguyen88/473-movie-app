@@ -2,23 +2,43 @@
 <head>
 <meta charset="UTF-8">
 <title>FAQ page!</title>
-<link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script src="semantic/dist/semantic.min.js"></script>
+    <link href="indexStyle.css" rel="stylesheet" type="text/css">
+    <!-- some hovering shit-->
+
 </head>
   <body>
-    <div class="nav">
-      <ul>
-	    <li class="home"><a href="#">HOME</a></li>
-        <li class="faq"><a class="active" href="#">FAQ</a></li>
-        <li class="privacy"><a href="projPriv.html">PRIVACY</a></li>
-        <li class="contact"><a href="projCon.html">CONTACT</a></li>
-      </ul>
-    </div>
     <header>
-      	<h1>Frequently Asked Questions(FAQ's)</h1>	  
-    </header>
+    <div class="ui center aligned padded grid" id="top">
+        <div class="ui inverted secondary large menu">
+            <div class="header item">
+                <a  href="index.html">
+                HOME
+                </a>
+            </div>
+            <a class="item" href="projFaq.html">
+                FAQ
+            </a>
+            <a class="item" href="projPriv.html">
+                PRIVACY
+            </a>
+            <a class="item" href="projCon.html">
+                CONTACT
+            </a>
+        </div>
+    </div>
+</header>
+    
 
     <main>
-      
+	
+	<div class="ui text left aligned fluid container">
+        <h1 class="ui header">
+            Frequently Asked Question's (FAQ's)
+        </h1>
+	</div>	
+    
       <p>1) How often do you watch Movies/TV shows?</p> 
       <p>Ans: Once in a week.</p>  
 	  <p>2) How many people visit this website on an average on a day?</p>
