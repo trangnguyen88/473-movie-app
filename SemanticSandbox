@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="sliderAnimation.js" ></script>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script src="semantic/dist/semantic.min.js"></script>
+    <link href="semanticSandboxStyle.css" rel="stylesheet" type="text/css">
+    <!-- some hovering shit-->
+    
+    <title>sandbox</title>
+</head>
+<body>
+    <div class="ui padded grid" id="top">
+        <div class="sixteen center aligned wide column">
+            <div class="ui padded grid">
+                <div class="three wide middle aligned content  column">
+                    <div class="left-button">
+                        <button class="massive ui button" id="left-bttn"><</button>
+                    </div>
+                </div>
+                <div class="ten wide column">
+                    <div class= "movie-container">
+                        <div class="ui grid">
+                            <!--cards generated with JS go here-->
+                    </div>
+                </div>
+            </div>
+            <div class="two wide middle aligned content column">
+                <div class="right-button">
+                    <button class="massive ui button" id="right-bttn">></button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="ui padded grid" id="bottom">
+    </div>
+</body>
+</html>
