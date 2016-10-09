@@ -5,7 +5,7 @@
     <script src="sliderAnimation.js" ></script>
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
     <script src="semantic/dist/semantic.min.js"></script>
-    <link href="semanticSandboxStyle.css" rel="stylesheet" type="text/css">
+    <link href="indexStyle.css.css" rel="stylesheet" type="text/css">
     <!-- some hovering shit-->
     
     <title>sandbox</title>
