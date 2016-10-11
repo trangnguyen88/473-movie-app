@@ -1,0 +1,22 @@
+{
+  "name": "MovieApp",
+  "version": "1.0.0",
+  "description": "CPSC 473 Project 1 - Team Musicological-conjur",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RodrigoFigueroaM/473-movie-app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongoose": "^4.4.14",
+	"bluebird": "^3.3.5",
+    "body-parser": "^1.15.0"
+  }
+}

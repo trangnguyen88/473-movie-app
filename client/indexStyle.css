@@ -1,0 +1,91 @@
+body
+{
+    background-color:#BCBEC0;
+}
+#main
+{
+    background-color:#BCBEC0;
+}
+#bottom, #top
+{
+    color: white;
+    background-color:#441244;
+    height: 20%;
+}
+#bottom
+{
+    height: 5em;
+}
+
+
+ #left-bttn,#right-bttn
+{
+    border-color: #5B5B5B;
+    font-size: 2em;
+    width: 1.5em;
+    height: 1.5em;
+    font-size: 3em;
+    border-radius: 3em;
+    color: black;
+    margin: 0%;
+    padding: 0%;
+}
+
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card
+{
+    background-color:#F6F6F6;
+    border: 0px;
+    border-color:  #BCBEC0;
+    opacity: .6;
+}
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card:hover
+{
+    background-color:#F6F6F6;
+    border: 0px;
+    border-color:  #BCBEC0;
+    opacity: 1;
+}
+
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .ui.center.aligned.segment
+{
+    background-color:#441244;
+    color: #F6F6F6;
+    margin: 0%;
+    font-size: 1em;
+}
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img
+{
+    max-width: 17em;
+    height: 24em;
+}
+
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content
+{
+    background-color:#9F9F9F ;
+    border-color:  #BCBEC0;
+    color: white;
+    height: 3%;
+    width: 100%;
+}
+
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content .ui.two.attached.buttons .ui.green.button
+{
+    background-color:#1C7D69;
+    border-bottom-left-radius:1em;
+    color: white;
+
+}
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content .ui.two.attached.buttons .ui.red.button
+{
+    background-color:#B51B09;
+    color: white;
+    border-top-right-radius:1em;
+}
+
+/*main .container .rectangle:hover
+{
+
+    width: 15em;
+    height: 20em;
+}
+*/

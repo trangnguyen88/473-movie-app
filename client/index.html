@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="sliderAnimation.js" ></script>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script src="semantic/dist/semantic.min.js"></script>
+    <link href="indexStyle.css" rel="stylesheet" type="text/css">
+    <!-- some hovering shit-->
+
+    <title>Movie</title>
+</head>
+<!--menu-->
+<header>
+    <div class="ui center aligned padded grid" id="top">
+        <div class="ui inverted secondary large menu">
+            <div class="header item">
+                <a  href="index.html">
+                    HOME
+                </a>
+            </div>
+            <a class="item" href="projFaq.html">
+                FAQ
+            </a>
+            <a class="item" href="projPriv.html">
+                PRIVACY
+            </a>
+            <a class="item" href="projCon.html">
+                CONTACT
+            </a>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="ui padded grid" id="main">
+        <div class="sixteen center aligned wide column">
+            <div class="ui padded grid">
+                <div class="three wide middle aligned content column">
+                    <div class="left-button">
+                        <button class="massive ui button" id="left-bttn"><</button>
+                    </div>
+                </div>
+                <div class="ten wide column">
+                    <div class= "movie-container">
+                        <div class="ui grid">
+                            <!--cards generated with JS go here-->
+                    </div>
+                </div>
+            </div>
+            <div class="two wide middle aligned content column">
+                <div class="right-button">
+                    <button class="massive ui button" id="right-bttn">></button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="ui padded grid" id="bottom">
+    </div>
+	<div class="sitemap">
+          <h5>Sitemap</h5>
+          <ul>
+			<li><a href="projPriv.html">Privacy</a></li>
+            <li><a href="projCon.html">Contact Us</a></li>
+            <li><a href="projFaq.html">FAQ</a></li>
+          </ul>
+        </div>
+</footer>
+</html>
