@@ -18,7 +18,7 @@ var retrieveMovies = function()
 
 var displayMovies = function(movies)
 {
-    var step=0, start=0, end=3, total=movies.length;
+    var step=3, start=0, end=step, total=movies.length;
     var indexes=[start,end,step];
     var arrayOfItems=[];
     var i=0;
@@ -36,13 +36,13 @@ var displayMovies = function(movies)
     $("#left-bttn").on("click",function () {
         if(start<1)
         {
-            start=total-3;
+            start=total-step;
             end=total;
 
         }
         else {
-            start-=3;
-            end-=3;
+            start-=step;
+            end-=step;
         }
         generateMore([start,end],arrayOfItems);
     });
@@ -50,12 +50,12 @@ var displayMovies = function(movies)
         if(end>total-1)
         {
             start=0;
-            end=3;
+            end=step;
         }
         else
         {
-        start+=3;
-        end+=3;
+        start+=step;
+        end+=step;
         }
         generateMore([start,end],arrayOfItems);
     });
