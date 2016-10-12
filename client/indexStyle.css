@@ -53,10 +53,15 @@ main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .ui.c
     margin: 0%;
     font-size: 1em;
 }
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image
+{
+    width: 100%;
+    height: 25em;
+}
 main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img
 {
-    max-width: 17em;
-    height: 24em;
+    width: 100%;
+    height: 100%;
 }
 
 main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content
