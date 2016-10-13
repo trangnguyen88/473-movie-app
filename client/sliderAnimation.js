@@ -67,17 +67,46 @@ var generateMore = function(indexes, arrayOfItems, movies) {
 
     //Pop Up style
     $(arrayOfItems).each(function(index) {
-        //Remove click eventhandler if it is set before to prevent duplication
-        $(this).unbind('click');
+
+        //Remove click eventhandlers if they are set before to prevent duplication
+        $(this).find('.image').unbind('click');
+        $(this).find('.ui .green').unbind('click');
+        $(this).find('.ui .red').unbind('click');
 
         //Add click eventhandler back
-        $(this).on('click', function() {
+        $(this).find('.image').on('click', function() {
             console.log(index);
             appendmodal(movies[index].title);
 
         })
+
+        $(this).find('.ui .green').on('click', function() {
+
+            var input = { vote: "yes", title: movies[index].title };
+            sendVoteToServer(input, index, this.closest('.extra'));
+        })
+
+        $(this).find('.ui .red').on('click', function() {
+            var input = { vote: "no", title: movies[index].title };
+            sendVoteToServer(input, index, this.closest('.extra'));
+        })
     });
 
+}
+
+var sendVoteToServer = function(input, index, parentNode) {
+    $.post('/movie/title/vote', input, function(res) {
+        console.log(res.result);
+
+        if (res.result == 'success') {
+            //update votes on the movie
+            Movies[index].meta.votes = res.newVotes;
+            Movies[index].meta.likes = res.newLikes;
+
+            //Update rating
+            $(parentNode).find('.rating').text('Likes: ' + res.newLikes + ' / Total Votes: ' + res.newVotes);
+        }
+    })
 }
 
 var newItem = function(object) {
@@ -96,7 +125,8 @@ var newItem = function(object) {
         '<button class="ui green button"><i class="chevron up icon"></i></button>' +
         '<div class="or"> </div>' +
         '<button class="ui red button"><i class="chevron down icon"></i></button>' +
-        '</div>' + object.meta.likes / 100 + '</div></div></div>');
+        '</div>' +
+        '<span class="rating">Likes: ' + object.meta.likes + ' / Total Votes: ' + object.meta.votes + '</span></div></div></div>');
     return $item;
 }
 
