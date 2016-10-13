@@ -19,21 +19,22 @@ var retrieveMovies = function()
 var displayMovies = function(movies)
 {
     var step=3, start=0, end=step, total=movies.length;
-    var indexes=[start,end,step];
+    //step=(total)%4;
+    var indexes=[start,end];
     var arrayOfItems=[];
     var i=0;
     //generate all movies and put in arrayOfItems
     for(i;i<total;i++)
     {
         var $element= newItem(movies[i]);
-        console.log(movies[0]);
         arrayOfItems.push($element);
     }
 
     //put all elements in array
-    generateMore(indexes, arrayOfItems);
+    generateMore(indexes, arrayOfItems,movies);
 
-    $("#left-bttn").on("click",function () {
+    $("#left-bttn").on("click",function ()
+    {
         if(start<1)
         {
             start=total-step;
@@ -44,9 +45,10 @@ var displayMovies = function(movies)
             start-=step;
             end-=step;
         }
-        generateMore([start,end],arrayOfItems);
+       generateMore([start,end],arrayOfItems,movies);
     });
-    $("#right-bttn").on("click",function () {
+    $("#right-bttn").on("click",function ()
+     {
         if(end>total-1)
         {
             start=0;
@@ -57,11 +59,23 @@ var displayMovies = function(movies)
         start+=step;
         end+=step;
         }
-        generateMore([start,end],arrayOfItems);
+        generateMore([start,end],arrayOfItems,movies);
     });
+    //Pop Up style
+    $(arrayOfItems).each(function(index)
+    {
+
+        $(this).on('click',function()
+        {
+            console.log(index);
+            appendmodal(movies[index].title);
+
+        })
+    });
+
 }
 
-var generateMore = function(indexes,arrayOfItems)
+var generateMore = function(indexes,arrayOfItems,movies)
 {
     var numberOfSquaresToShow=indexes[1];
     var i=indexes[0];
@@ -73,15 +87,6 @@ var generateMore = function(indexes,arrayOfItems)
         $container.append(arrayOfItems[i]);
     }
 
-    //Pop Up style
-    $(arrayOfItems).each(function(index)
-    {
-        $(this).on('click',function()
-        {
-            appendmodal();
-            $('.ui.modal').modal('show');
-        })
-    });
 }
 
 var newItem = function(object)
@@ -104,18 +109,31 @@ var newItem = function(object)
     return $item;
 }
 
-var appendmodal = function ()
+var appendmodal = function (name)
 {
-    var $popUpElement =$('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>'
-    +' <h1 class="ui header">'+'make call to omdb and parse info in a pretty way'
-    +'</hi>'
-    +'</div></div>');
-    $('head').append($popUpElement);
+    $.getJSON('http://www.omdbapi.com/?t='+name+'&y=&plot=short&r=json',function(info)
+    {
+        var $popUpElement =$('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>'
+        +' <h1 class="ui header">'+name
+        +'</hi>'
+        +'<p>'+info.Year+'</p>'+
+        +'</div></div>');
+        $('head').append($popUpElement);
+        $('.ui.modal').modal('show');
+        modal($popUpElement);
+
+    });
+}
+
+var modal =function($popUpElement)
+{
+
     $('#modal-button').on('click',function()
     {
         $('.ui.modal').modal('hide');
         $('.ui.modal').remove();
     })
 }
+
 
 $(document).ready(main);
