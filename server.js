@@ -18,6 +18,7 @@ mongoose.connect('mongodb://localhost/Movie');
 // Create a movie schema
 // create a schema
 var movieSchema = mongoose.Schema({
+    title: String,
     movie: JSON,
     meta: {
         votes: Number,
@@ -40,7 +41,7 @@ listOfMovies.forEach(function(name) {
 
         var info = JSON.parse(body);
         console.log(info.Title);
-        var movie = new Movie({ movie: info, meta: { votes: 0, likes: 0 } });
+        var movie = new Movie({ title: info.Title, movie: info, meta: { votes: 0, likes: 0 } });
         // Store the movie to the database
         movie.save();
     });
@@ -67,7 +68,7 @@ app.post('/movie/title/vote', function(req, res) {
     var vote = req.body.vote;
     var name = req.body.title;
     console.log('Stranger votes ' + vote + ' on ' + name);
-    Movie.findOne({ movie: { Title: name } }, function(err, result) {
+    Movie.findOne({ title: name }, function(err, result) {
         if (err) {
             res.json({ 'result': 'error' });
             console.log("Error on accessing the database");
