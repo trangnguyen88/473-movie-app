@@ -76,18 +76,18 @@ var generateMore = function(indexes, arrayOfItems, movies) {
         //Add click eventhandler back
         $(this).find('.image').on('click', function() {
             console.log(index);
-            appendmodal(movies[index].title);
+            appendmodal(movies[index].movie);
 
         })
 
         $(this).find('.ui .green').on('click', function() {
 
-            var input = { vote: "yes", title: movies[index].title };
+            var input = { vote: "yes", title: movies[index].movie.Title };
             sendVoteToServer(input, index, this.closest('.extra'));
         })
 
         $(this).find('.ui .red').on('click', function() {
-            var input = { vote: "no", title: movies[index].title };
+            var input = { vote: "no", title: movies[index].movie.Title };
             sendVoteToServer(input, index, this.closest('.extra'));
         })
     });
@@ -115,10 +115,10 @@ var newItem = function(object) {
     var $id;
     $item = $('<div class="five wide column">' +
         '<div class="ui card">' +
-        '<div class="ui center aligned segment">' + object.title + '</div>' // title
+        '<div class="ui center aligned segment">' + object.movie.Title + '</div>' // title
         +
         '<div class="image">' +
-        '<img src=' + object.photo + ' >' +
+        '<img src=' + object.movie.Poster + ' >' +
         '</div>' +
         '<div class="extra center aligned content">' +
         '<div class="ui two attached buttons">' +
@@ -130,18 +130,17 @@ var newItem = function(object) {
     return $item;
 }
 
-var appendmodal = function(name) {
-    $.getJSON('http://www.omdbapi.com/?t=' + name + '&y=&plot=short&r=json', function(info) {
-        var $popUpElement = $('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>' +
-            ' <h1 class="ui header">' + name +
-            '</hi>' +
-            '<p>' + info.Year + '</p>' +
-            +'</div></div>');
-        $('head').append($popUpElement);
-        $('.ui.modal').modal('show');
-        modal($popUpElement);
+var appendmodal = function(movie) {
 
-    });
+    var $popUpElement = $('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>' +
+        ' <h1 class="ui header">' + movie.Title +
+        '</hi>' +
+        '<p>' + movie.Year + '</p>' +
+        +'</div></div>');
+    $('head').append($popUpElement);
+    $('.ui.modal').modal('show');
+    modal($popUpElement);
+
 }
 
 var modal = function($popUpElement) {
