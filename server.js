@@ -2,9 +2,12 @@ var express = require('express'),
     http = require('http'),
     parser = require("body-parser"),
     mongoose = require("mongoose"),
+    fs = require('fs'),
     app;
-var request = require('request');
+//var request = require('request');
 //create our Express powered HTTP server
+var listOfMovies; //= ['Fight Club', 'The Force Awakens', 'The Dark Knight', 'Harry Potter And The Order Of The Phoenix', 'SuperBad', 'Scott Pilgrim Vs The World', 'DeadPool', 'The Little Mermaid', 'Suicide Squad'];
+
 app = express();
 
 app.use(express.static(__dirname + '/client'));
@@ -12,7 +15,7 @@ app.use(express.static(__dirname + '/client'));
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 
-//Connect to mongodb database 
+//Connect to mongodb database
 mongoose.connect('mongodb://localhost/Movie');
 
 // Create a movie schema
@@ -34,8 +37,9 @@ Movie.remove({}, function(err) {
     console.log('collection removed')
 });
 
-var listOfMovies = ['Fight Club', 'The Force Awakens', 'The Dark Knight', 'Harry Potter And The Order Of The Phoenix', 'SuperBad', 'Scott Pilgrim Vs The World', 'DeadPool', 'The Little Mermaid', 'Suicide Squad'];
 
+
+/*
 listOfMovies.forEach(function(name) {
     request('http://www.omdbapi.com/?t=' + name + '&y=&plot=short&r=json', function(error, response, body) {
 
@@ -46,7 +50,7 @@ listOfMovies.forEach(function(name) {
         movie.save();
     });
 });
-
+*/
 
 app.get('/', function(req, res) {
     res.send('This is the root route');
@@ -96,6 +100,15 @@ app.post('/movie/title/vote', function(req, res) {
 });
 
 
-http.createServer(app).listen(3000);
+var server = http.createServer(function(req,res)
+    {
+        fs.readFile('movies.txt','utf8', function (err,fileData)
+            {
+                listOfMovies=fileData.replace(/\n/g, " ");
+                listOfMovies=listOfMovies.replace(/\r/g, " ");
+                listOfMovies=listOfMovies.split(', ');
+                console.log(listOfMovies[1]);
+            });
+        }).listen(3000);
 //set up our routes
 console.log('server is listening on port 3000');
