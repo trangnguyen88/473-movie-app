@@ -39,8 +39,24 @@ var displayMovies = function(movies) {
             start -= step;
             end -= step;
         }
-        generateMore([start, end], arrayOfItems, movies);
+        $('.movie-container')
+        .transition(
+            {
+                animation  : 'fade right',
+                duration   : '1s',
+                onComplete : function()
+                {
+                    generateMore([start,end],arrayOfItems);
+                    $('.movie-container')
+                    .transition(
+                        {
+                            animation  : 'fade left',
+                            duration   : '1s',
+                        });
+                }
+            });
     });
+
     $("#right-bttn").on("click", function() {
         if (end > total - 1) {
             start = 0;
@@ -49,7 +65,22 @@ var displayMovies = function(movies) {
             start += step;
             end += step;
         }
-        generateMore([start, end], arrayOfItems, movies);
+        $('.movie-container')
+        .transition(
+            {
+                animation  : 'fade left',
+                duration   : '1s',
+                onComplete : function()
+                {
+                    generateMore([start,end],arrayOfItems);
+                    $('.movie-container')
+                    .transition(
+                        {
+                            animation  : 'fade right',
+                            duration   : '1s',
+                        });
+                }
+            });
     });
 
 
