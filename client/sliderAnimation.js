@@ -43,7 +43,7 @@ var displayMovies = function(movies) {
         .transition(
             {
                 animation  : 'fade right',
-                duration   : '1s',
+                duration   : '.7s',
                 onComplete : function()
                 {
                     generateMore([start,end],arrayOfItems);
@@ -51,7 +51,7 @@ var displayMovies = function(movies) {
                     .transition(
                         {
                             animation  : 'fade left',
-                            duration   : '1s',
+                            duration   : '.7s',
                         });
                 }
             });
@@ -69,7 +69,7 @@ var displayMovies = function(movies) {
         .transition(
             {
                 animation  : 'fade left',
-                duration   : '1s',
+                duration   : '.7s',
                 onComplete : function()
                 {
                     generateMore([start,end],arrayOfItems);
@@ -77,7 +77,7 @@ var displayMovies = function(movies) {
                     .transition(
                         {
                             animation  : 'fade right',
-                            duration   : '1s',
+                            duration   : '.7s',
                         });
                 }
             });
