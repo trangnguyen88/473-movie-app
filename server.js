@@ -3,6 +3,7 @@ var express = require('express'),
     parser = require("body-parser"),
     mongoose = require("mongoose"),
     fs = require('fs'),
+    request = require('request'),
     app;
 //var request = require('request');
 //create our Express powered HTTP server
@@ -16,7 +17,7 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 
 //Connect to mongodb database
-mongoose.connect('mongodb://localhost/Movie');
+mongoose.connect('mongodb://localhost/movie');
 
 // Create a movie schema
 // create a schema
@@ -38,19 +39,6 @@ Movie.remove({}, function(err) {
 });
 
 
-
-/*
-listOfMovies.forEach(function(name) {
-    request('http://www.omdbapi.com/?t=' + name + '&y=&plot=short&r=json', function(error, response, body) {
-
-        var info = JSON.parse(body);
-        console.log(info.Title);
-        var movie = new Movie({ title: info.Title, movie: info, meta: { votes: 0, likes: 0 } });
-        // Store the movie to the database
-        movie.save();
-    });
-});
-*/
 
 app.get('/', function(req, res) {
     res.send('This is the root route');
@@ -100,15 +88,24 @@ app.post('/movie/title/vote', function(req, res) {
 });
 
 
-var server = http.createServer(function(req,res)
-    {
-        fs.readFile('movies.txt','utf8', function (err,fileData)
-            {
-                listOfMovies=fileData.replace(/\n/g, " ");
-                listOfMovies=listOfMovies.replace(/\r/g, " ");
-                listOfMovies=listOfMovies.split(', ');
-                console.log(listOfMovies[1]);
+app.listen(3000, function() {
+    fs.readFile('movies.txt','utf8', function (err,fileData)
+        {
+            listOfMovies=fileData.replace(/\n/g, " ");
+            listOfMovies=listOfMovies.replace(/\r/g, " ");
+            listOfMovies=listOfMovies.split(', ');
+
+            listOfMovies.forEach(function(name) {
+                    request('http://www.omdbapi.com/?t=' + name + '&y=&plot=short&r=json', function(error, response, body) {
+                    var info = JSON.parse(body);
+                    console.log(info.Title);
+                    var movie = new Movie({ title: info.Title, movie: info, meta: { votes: 0, likes: 0 } });
+                    // Store the movie to the database
+                    movie.save();
+                });
             });
-        }).listen(3000);
+            console.log('server is listening on port 3000');
+
+        });
+});
 //set up our routes
-console.log('server is listening on port 3000');
