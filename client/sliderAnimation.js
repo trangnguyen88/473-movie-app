@@ -127,31 +127,31 @@ var generateMore = function(indexes, arrayOfItems, movies) {
 
 var sendVoteToServer = function(input, index, parentNode, node) {
     $.post('/movie/title/vote', input, function(res) {
-        console.log(res.result);
-        console.log(parentNode);
+        //console.log(res.result);
+        //console.log(parentNode);
         var $temp = node.next();
-        console.log($temp);
+        //console.log($temp);
 
         if (res.result == 'success') {
             //update votes on the movie
             Movies[index].meta.votes = res.newVotes;
             Movies[index].meta.likes = res.newLikes;
             var progressBar = (res.newLikes/res.newVotes)*100;
-            console.log("Progress equals to : " +progressBar);
+            //console.log("Progress equals to : " +progressBar);
 
             //Update rating
             $(parentNode).find('.rating').text('Likes: ' + res.newLikes + ' / Total Votes: ' + res.newVotes);
 
             //Update the width of progress bar
             var $temp1 = $temp.children();
-            console.log($temp1.width());
+            //console.log($temp1.width());
     
             $temp1.width(progressBar +'%');
 
             var $temp2 = $temp1.children();
             $temp2.text(parseInt(progressBar) +'%');
 
-            console.log("DONE");
+            //console.log("DONE");
             
         }
     })
