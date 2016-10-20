@@ -31,16 +31,20 @@ body
     padding: 0%;
 }
 
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img
 {
     background-color:#F6F6F6;
     border: 0px;
     border-color:  #BCBEC0;
     opacity: .6;
 }
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card:hover
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card
 {
-    background-color:#F6F6F6;
+    border: 0px;
+    border-color:  #BCBEC0;
+}
+main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img:hover
+{
     border: 0px;
     border-color:  #BCBEC0;
     opacity: 1;

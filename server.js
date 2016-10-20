@@ -5,10 +5,11 @@ var express = require('express'),
     fs = require('fs'),
     request = require('request'),
     app;
-//var request = require('request');
-//create our Express powered HTTP server
-var listOfMovies; //= ['Fight Club', 'The Force Awakens', 'The Dark Knight', 'Harry Potter And The Order Of The Phoenix', 'SuperBad', 'Scott Pilgrim Vs The World', 'DeadPool', 'The Little Mermaid', 'Suicide Squad'];
 
+//local variable
+var listOfMovies;
+
+//create our Express powered HTTP server
 app = express();
 
 app.use(express.static(__dirname + '/client'));
@@ -104,8 +105,7 @@ app.listen(3000, function() {
                     movie.save();
                 });
             });
-            console.log('server is listening on port 3000');
-
         });
+        //set up our route
+        console.log('server is listening on port 3000');
 });
-//set up our routes
