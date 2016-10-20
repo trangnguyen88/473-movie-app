@@ -114,28 +114,45 @@ var generateMore = function(indexes, arrayOfItems, movies) {
         $(this).find('.ui .green').on('click', function() {
 
             var input = { vote: "yes", title: movies[index].movie.Title };
-            sendVoteToServer(input, index, this.closest('.extra'));
+            sendVoteToServer(input, index, this.closest('.extra'), $(this).parent());
         })
 
         $(this).find('.ui .red').on('click', function() {
             var input = { vote: "no", title: movies[index].movie.Title };
-            sendVoteToServer(input, index, this.closest('.extra'));
+            sendVoteToServer(input, index, this.closest('.extra'), $(this).parent());
         })
     });
 
 }
 
-var sendVoteToServer = function(input, index, parentNode) {
+var sendVoteToServer = function(input, index, parentNode, node) {
     $.post('/movie/title/vote', input, function(res) {
         console.log(res.result);
+        console.log(parentNode);
+        var $temp = node.next();
+        console.log($temp);
 
         if (res.result == 'success') {
             //update votes on the movie
             Movies[index].meta.votes = res.newVotes;
             Movies[index].meta.likes = res.newLikes;
+            var progressBar = (res.newLikes/res.newVotes)*100;
+            console.log("Progress equals to : " +progressBar);
 
             //Update rating
             $(parentNode).find('.rating').text('Likes: ' + res.newLikes + ' / Total Votes: ' + res.newVotes);
+
+            //Update the width of progress bar
+            var $temp1 = $temp.children();
+            console.log($temp1.width());
+    
+            $temp1.width(progressBar +'%');
+
+            var $temp2 = $temp1.children();
+            $temp2.text(parseInt(progressBar) +'%');
+
+            console.log("DONE");
+            
         }
     })
 }
@@ -144,6 +161,7 @@ var newItem = function(object) {
     //    $photo = Movies[i].photo;
     var item;
     var $id;
+    var $progress = parseInt(object.meta.likes/object.meta.votes*100);
     $item = $('<div class="five wide column">' +
         '<div class="ui card">' +
         '<div class="ui center aligned segment">' + object.movie.Title + '</div>' // title
@@ -157,7 +175,13 @@ var newItem = function(object) {
         '<div class="or"> </div>' +
         '<button class="ui red button"><i class="chevron down icon"></i></button>' +
         '</div>' +
-        '<span class="rating">Likes: ' + object.meta.likes + ' / Total Votes: ' + object.meta.votes + '</span></div></div></div>');
+        '<div class="ui indicating progress active"  data-percent = '+ $progress + '>' +
+        '<div class="bar" style = "transition-duration : 300ms; width : ' + $progress + '%">' +
+        '<div class="progress">'+ $progress + '%</div>' +
+        '</div>' +
+        '</div>' +
+        '<span class="rating">Likes: ' + object.meta.likes + ' / Total Votes: ' + object.meta.votes + '</span>' + 
+        '</div></div></div>');
     return $item;
 }
 
