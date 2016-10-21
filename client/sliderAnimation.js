@@ -161,8 +161,13 @@ var newItem = function(object) {
     //    $photo = Movies[i].photo;
     var item;
     var $id;
-    var $progress = parseInt(object.meta.likes/object.meta.votes*100);
-    $item = $('<div class="five wide column">' +
+    var $progress;// = parseInt(object.meta.likes/object.meta.votes*100);
+        if( object.meta.likes==0 && object.meta.votes==0)
+            $progress = 100;
+        else
+            $progress = parseInt(object.meta.likes/object.meta.votes*100);
+    console.log($progress);
+        $item = $('<div class="five wide column">' +
         '<div class="ui card">' +
         '<div class="ui center aligned segment">' + object.movie.Title + '</div>' // title
         +
@@ -175,12 +180,11 @@ var newItem = function(object) {
         '<div class="or"> </div>' +
         '<button class="ui red button"><i class="chevron down icon"></i></button>' +
         '</div>' +
-        '<div class="ui indicating progress active"  data-percent = '+ $progress + '>' +
+        '<div class="ui progress"  data-percent = '+ $progress + '>' +
         '<div class="bar" style = "transition-duration : 300ms; width : ' + $progress + '%">' +
         '<div class="progress">'+ $progress + '%</div>' +
         '</div>' +
         '</div>' +
-        '<span class="rating">Likes: ' + object.meta.likes + ' / Total Votes: ' + object.meta.votes + '</span>' + 
         '</div></div></div>');
     return $item;
 }
