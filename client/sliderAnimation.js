@@ -163,7 +163,7 @@ var newItem = function(object) {
     var $id;
     var $progress;// = parseInt(object.meta.likes/object.meta.votes*100);
         if( object.meta.likes==0 && object.meta.votes==0)
-            $progress = 100;
+            $progress = 0;
         else
             $progress = parseInt(object.meta.likes/object.meta.votes*100);
     console.log($progress);
