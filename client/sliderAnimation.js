@@ -75,7 +75,6 @@ var generateMore = function(indexes, arrayOfItems, movies) {
 
         //Add click eventhandler back
         $(this).find('.image').on('click', function() {
-            console.log(index);
             $('.ui.modal').each(function() {
                 $(this).remove();
             });
@@ -99,32 +98,24 @@ var generateMore = function(indexes, arrayOfItems, movies) {
 
 var sendVoteToServer = function(input, index, parentNode, node) {
     $.post('/movie/title/vote', input, function(res) {
-        //console.log(res.result);
-        //console.log(parentNode);
         var $temp = node.next();
-        //console.log($temp);
 
         if (res.result == 'success') {
             //update votes on the movie
             Movies[index].meta.votes = res.newVotes;
             Movies[index].meta.likes = res.newLikes;
             var progressBar = (res.newLikes / res.newVotes) * 100;
-            //console.log("Progress equals to : " +progressBar);
-
             //Update rating
             $(parentNode).find('.rating').text('Likes: ' + res.newLikes + ' / Total Votes: ' + res.newVotes);
             //Update the width of progress bar
             var $temp1 = $temp.children();
-            //console.log($temp1.width());
 
             $temp1.width(progressBar + '%');
 
             var $temp2 = $temp1.children();
             $temp2.text(parseInt(progressBar) + '%');
-            //console.log(Movies[index]);
             updateVotes(Movies[index], Movies[index].meta.votes);
-            //console.log("DONE");
-
+            updateProgessbar(Movies[index],(Movies[index].meta.likes/Movies[index].meta.votes)*100);
         }
     })
 }
@@ -134,14 +125,14 @@ var newItem = function(object) {
     var item;
     var $id;
     var votes = object.meta.votes;
+    var likes= object.meta.likes;
     var $progress; // = parseInt(object.meta.likes/object.meta.votes*100);
-    if (object.meta.likes == 0 && object.meta.votes == 0)
+    if (likes == 0 && votes == 0)
         $progress = 0;
     else
-        $progress = parseInt(object.meta.likes / object.meta.votes * 100);
-    console.log($progress);
+        $progress = parseInt(likes / votes * 100);
     $item = $('<div class="five wide column">' +
-        '<div class="ui card">' +
+        '<div class="ui card"id="' + object.movie.Title + '">' +
         '<div class="ui center aligned segment">' + object.movie.Title + '</div>' // title
         +
         '<div class="image">' +
@@ -153,7 +144,7 @@ var newItem = function(object) {
         '<div class="or"> </div>' +
         '<button class="ui red button"><i class="chevron down icon"></i></button>' +
         '</div>' +
-        '<div class="ui statistic" id="' + object.movie.Title + '">' +
+        '<div class="ui statistic" >' +
         '<div class="label">' +
         'Votes' + '</div>' +
         '<div class="value" >' + votes + '</div></div>' +
@@ -162,17 +153,27 @@ var newItem = function(object) {
         '</div>' +
         '</div>' +
         '</div></div></div>');
-    console.log("votes " + votes);
     return $item;
 }
-var updateVotes = function(object, votes) {
-    var $field = $("div[id='" + object.movie.Title + "']");
+var updateVotes = function(object, votes)
+{
+    var $field = $("div[id='" + object.movie.Title + "'] .ui.statistic");
     var $oldVote = $("div[id='" + object.movie.Title + "'] .value");
     var $updateTotal = '<div class="value" >' + votes + '</div></div>'
 
     $('<div class="value" id="' + object.movie.Title + ' " >'); //+votes +'</div>') ;
     $oldVote.remove();
     $($field).append($updateTotal);
+
+}
+var updateProgessbar= function (object, avg)
+{
+    var $field = $("div[id='" + object.movie.Title + "'] .extra.center.aligned.content");
+    var $progressBar=$("div[id='" + object.movie.Title + "'] .ui.tiny.progress");
+    var $updatedProgressBar= '<div class="ui tiny progress"  data-percent = ' + avg + '>' +'<div class="bar" style = "transition-duration : 300ms;  width : ' + avg + '%">';
+
+    $progressBar.remove();
+    $($field).append($updatedProgressBar);
 
 }
 var appendmodal = function(movie) {
