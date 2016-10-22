@@ -43,7 +43,7 @@ var displayMovies = function(movies) {
         .transition(
             {
                 animation  : 'fade right',
-                duration   : '.7s',
+                duration   : '.3s',
                 onComplete : function()
                 {
                     generateMore([start,end],arrayOfItems);
@@ -51,7 +51,7 @@ var displayMovies = function(movies) {
                     .transition(
                         {
                             animation  : 'fade left',
-                            duration   : '.7s',
+                            duration   : '.3s',
                         });
                 }
             });
@@ -69,7 +69,7 @@ var displayMovies = function(movies) {
         .transition(
             {
                 animation  : 'fade left',
-                duration   : '.7s',
+                duration   : '.5s',
                 onComplete : function()
                 {
                     generateMore([start,end],arrayOfItems);
@@ -77,7 +77,7 @@ var displayMovies = function(movies) {
                     .transition(
                         {
                             animation  : 'fade right',
-                            duration   : '.7s',
+                            duration   : '1s',
                         });
                 }
             });
@@ -141,7 +141,6 @@ var sendVoteToServer = function(input, index, parentNode, node) {
 
             //Update rating
             $(parentNode).find('.rating').text('Likes: ' + res.newLikes + ' / Total Votes: ' + res.newVotes);
-
             //Update the width of progress bar
             var $temp1 = $temp.children();
             //console.log($temp1.width());
@@ -150,7 +149,8 @@ var sendVoteToServer = function(input, index, parentNode, node) {
 
             var $temp2 = $temp1.children();
             $temp2.text(parseInt(progressBar) +'%');
-
+            //console.log(Movies[index]);
+            updateVotes( Movies[index], Movies[index].meta.votes );
             //console.log("DONE");
 
         }
@@ -161,6 +161,7 @@ var newItem = function(object) {
     //    $photo = Movies[i].photo;
     var item;
     var $id;
+    var votes=object.meta.votes;
     var $progress;// = parseInt(object.meta.likes/object.meta.votes*100);
         if( object.meta.likes==0 && object.meta.votes==0)
             $progress = 0;
@@ -180,13 +181,28 @@ var newItem = function(object) {
         '<div class="or"> </div>' +
         '<button class="ui red button"><i class="chevron down icon"></i></button>' +
         '</div>' +
-        '<div class="ui progress"  data-percent = '+ $progress + '>' +
-        '<div class="bar" style = "transition-duration : 300ms; width : ' + $progress + '%">' +
-        '<div class="progress">'+ $progress + '%</div>' +
+        '<div class="ui statistic" id="'+object.movie.Title +'">'+
+        '<div class="label">'+
+        'Votes'+'</div>'+
+        '<div class="value" >'+votes +'</div></div>'+
+        '<div class="ui tiny progress"  data-percent = '+ $progress + '>' +
+        '<div class="bar" style = "transition-duration : 300ms;  width : ' + $progress + '%">' +
         '</div>' +
         '</div>' +
         '</div></div></div>');
+        console.log("votes " +votes);
     return $item;
+}
+var updateVotes= function(object,votes)
+{
+    var $field=$("div[id='"+object.movie.Title+"']");
+    var $oldVote=$("div[id='"+object.movie.Title+"'] .value");
+    var $updateTotal ='<div class="value" >'+votes +'</div></div>'
+
+    $('<div class="value" id="'+object.movie.Title +' " >');//+votes +'</div>') ;
+    $oldVote.remove();
+    $($field).append($updateTotal);
+
 }
 var appendmodal = function(movie) {
 var $popUpElement = $('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>' +
