@@ -39,24 +39,8 @@ var displayMovies = function(movies) {
             start -= step;
             end -= step;
         }
-        $('.movie-container')
-        .transition(
-            {
-                animation  : 'fade right',
-                duration   : '.3s',
-                onComplete : function()
-                {
-                    generateMore([start,end],arrayOfItems);
-                    $('.movie-container')
-                    .transition(
-                        {
-                            animation  : 'fade left',
-                            duration   : '.3s',
-                        });
-                }
-            });
+        generateMore([start, end], arrayOfItems, movies);
     });
-
     $("#right-bttn").on("click", function() {
         if (end > total - 1) {
             start = 0;
@@ -65,22 +49,7 @@ var displayMovies = function(movies) {
             start += step;
             end += step;
         }
-        $('.movie-container')
-        .transition(
-            {
-                animation  : 'fade left',
-                duration   : '.5s',
-                onComplete : function()
-                {
-                    generateMore([start,end],arrayOfItems);
-                    $('.movie-container')
-                    .transition(
-                        {
-                            animation  : 'fade right',
-                            duration   : '1s',
-                        });
-                }
-            });
+        generateMore([start, end], arrayOfItems, movies);
     });
 
 
@@ -107,20 +76,23 @@ var generateMore = function(indexes, arrayOfItems, movies) {
         //Add click eventhandler back
         $(this).find('.image').on('click', function() {
             console.log(index);
+            $('.ui.modal').each(function() {
+                $(this).remove();
+            });
             appendmodal(movies[index].movie);
 
-        })
+        });
 
         $(this).find('.ui .green').on('click', function() {
 
             var input = { vote: "yes", title: movies[index].movie.Title };
             sendVoteToServer(input, index, this.closest('.extra'), $(this).parent());
-        })
+        });
 
         $(this).find('.ui .red').on('click', function() {
             var input = { vote: "no", title: movies[index].movie.Title };
             sendVoteToServer(input, index, this.closest('.extra'), $(this).parent());
-        })
+        });
     });
 
 }
@@ -136,7 +108,7 @@ var sendVoteToServer = function(input, index, parentNode, node) {
             //update votes on the movie
             Movies[index].meta.votes = res.newVotes;
             Movies[index].meta.likes = res.newLikes;
-            var progressBar = (res.newLikes/res.newVotes)*100;
+            var progressBar = (res.newLikes / res.newVotes) * 100;
             //console.log("Progress equals to : " +progressBar);
 
             //Update rating
@@ -145,12 +117,12 @@ var sendVoteToServer = function(input, index, parentNode, node) {
             var $temp1 = $temp.children();
             //console.log($temp1.width());
 
-            $temp1.width(progressBar +'%');
+            $temp1.width(progressBar + '%');
 
             var $temp2 = $temp1.children();
-            $temp2.text(parseInt(progressBar) +'%');
+            $temp2.text(parseInt(progressBar) + '%');
             //console.log(Movies[index]);
-            updateVotes( Movies[index], Movies[index].meta.votes );
+            updateVotes(Movies[index], Movies[index].meta.votes);
             //console.log("DONE");
 
         }
@@ -161,14 +133,14 @@ var newItem = function(object) {
     //    $photo = Movies[i].photo;
     var item;
     var $id;
-    var votes=object.meta.votes;
-    var $progress;// = parseInt(object.meta.likes/object.meta.votes*100);
-        if( object.meta.likes==0 && object.meta.votes==0)
-            $progress = 0;
-        else
-            $progress = parseInt(object.meta.likes/object.meta.votes*100);
+    var votes = object.meta.votes;
+    var $progress; // = parseInt(object.meta.likes/object.meta.votes*100);
+    if (object.meta.likes == 0 && object.meta.votes == 0)
+        $progress = 0;
+    else
+        $progress = parseInt(object.meta.likes / object.meta.votes * 100);
     console.log($progress);
-        $item = $('<div class="five wide column">' +
+    $item = $('<div class="five wide column">' +
         '<div class="ui card">' +
         '<div class="ui center aligned segment">' + object.movie.Title + '</div>' // title
         +
@@ -181,64 +153,63 @@ var newItem = function(object) {
         '<div class="or"> </div>' +
         '<button class="ui red button"><i class="chevron down icon"></i></button>' +
         '</div>' +
-        '<div class="ui statistic" id="'+object.movie.Title +'">'+
-        '<div class="label">'+
-        'Votes'+'</div>'+
-        '<div class="value" >'+votes +'</div></div>'+
-        '<div class="ui tiny progress"  data-percent = '+ $progress + '>' +
+        '<div class="ui statistic" id="' + object.movie.Title + '">' +
+        '<div class="label">' +
+        'Votes' + '</div>' +
+        '<div class="value" >' + votes + '</div></div>' +
+        '<div class="ui tiny progress"  data-percent = ' + $progress + '>' +
         '<div class="bar" style = "transition-duration : 300ms;  width : ' + $progress + '%">' +
         '</div>' +
         '</div>' +
         '</div></div></div>');
-        console.log("votes " +votes);
+    console.log("votes " + votes);
     return $item;
 }
-var updateVotes= function(object,votes)
-{
-    var $field=$("div[id='"+object.movie.Title+"']");
-    var $oldVote=$("div[id='"+object.movie.Title+"'] .value");
-    var $updateTotal ='<div class="value" >'+votes +'</div></div>'
+var updateVotes = function(object, votes) {
+    var $field = $("div[id='" + object.movie.Title + "']");
+    var $oldVote = $("div[id='" + object.movie.Title + "'] .value");
+    var $updateTotal = '<div class="value" >' + votes + '</div></div>'
 
-    $('<div class="value" id="'+object.movie.Title +' " >');//+votes +'</div>') ;
+    $('<div class="value" id="' + object.movie.Title + ' " >'); //+votes +'</div>') ;
     $oldVote.remove();
     $($field).append($updateTotal);
 
 }
 var appendmodal = function(movie) {
-var $popUpElement = $('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>' +
-   '<div class="ui items">' +
-     '<div class="item">' +
-       '<div class="image">' +
-         '<img src=' + movie.Poster + '>' +
-       '</div>' +
-       '<div class="content">' +
-         '<h1 class="ui header">' + movie.Title + ' (' + movie.Year + ')' +
-         '<div class="sub header">' +
-         movie.Rated + ' | ' + movie.Runtime + ' | ' + movie.Genre + ' | ' + movie.Released + ' (' + movie.Country + ')' +
-         '</div>' +
-         '</h1>' +
-         '<hr>' +
-         '<div class="description">' +
-           '<p>' + movie.Plot +'</p>' +
-         '</div>' +
-         '<div class="extra">' +
-           '<p><strong>Director</strong>: ' + movie.Director + '</p>' +
-           '<p><strong>Writers</strong>: ' + movie.Writer + '</p>' +
-           '<p><strong>Stars</strong>: ' + movie.Actors + '</p>' +
-         '</div>' +
-       '</div>' +
-       '<h3 class="ui bottom attached header">' +
-       '<p>Metascore: ' + movie.Metascore + '</p>' +
-       '<p>IMDB Rating: ' + movie.imdbRating + '</p>' +
-       '<p>IMDB Votes: ' + movie.imdbVotes + '</p>' +
-       '<p>Awards: ' + movie.Awards + '</p>' +
-       '</h3>' +
-     '</div>' +
-   '</div>' +
-   '</div>');
-   $('head').append($popUpElement.clone());
-   $('.ui.modal').modal('show');
-   modal($popUpElement);
+    var $popUpElement = $('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>' +
+        '<div class="ui items">' +
+        '<div class="item">' +
+        '<div class="image">' +
+        '<img src=' + movie.Poster + '>' +
+        '</div>' +
+        '<div class="content">' +
+        '<h1 class="ui header">' + movie.Title + ' (' + movie.Year + ')' +
+        '<div class="sub header">' +
+        movie.Rated + ' | ' + movie.Runtime + ' | ' + movie.Genre + ' | ' + movie.Released + ' (' + movie.Country + ')' +
+        '</div>' +
+        '</h1>' +
+        '<hr>' +
+        '<div class="description">' +
+        '<p>' + movie.Plot + '</p>' +
+        '</div>' +
+        '<div class="extra">' +
+        '<p><strong>Director</strong>: ' + movie.Director + '</p>' +
+        '<p><strong>Writers</strong>: ' + movie.Writer + '</p>' +
+        '<p><strong>Stars</strong>: ' + movie.Actors + '</p>' +
+        '</div>' +
+        '</div>' +
+        '<h3 class="ui bottom attached header">' +
+        '<p>Metascore: ' + movie.Metascore + '</p>' +
+        '<p>IMDB Rating: ' + movie.imdbRating + '</p>' +
+        '<p>IMDB Votes: ' + movie.imdbVotes + '</p>' +
+        '<p>Awards: ' + movie.Awards + '</p>' +
+        '</h3>' +
+        '</div>' +
+        '</div>' +
+        '</div>');
+    $('head').append($popUpElement);
+    $('.ui.modal').modal('show');
+    modal($popUpElement);
 }
 
 var modal = function($popUpElement) {
