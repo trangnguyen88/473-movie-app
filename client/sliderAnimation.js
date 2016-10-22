@@ -89,8 +89,8 @@ var displayMovies = function(movies) {
 var generateMore = function(indexes, arrayOfItems, movies) {
     var numberOfSquaresToShow = indexes[1];
     var i = indexes[0];
-    var $container = $("body .ui.grid .ten.wide.column .movie-container .ui.grid");
-    var $img = $('body .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img');
+    var $container = $("body .ui.grid .twelve.wide.column .movie-container .ui.grid");
+    var $img = $('body .twelve.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img');
     $($container).empty();
     for (i; i < numberOfSquaresToShow; ++i) {
         $container.append(arrayOfItems[i]);

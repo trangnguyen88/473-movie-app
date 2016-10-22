@@ -31,44 +31,47 @@ body
     padding: 0%;
 }
 
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img
+
+main .twelve.wide.column .movie-container .ui.grid .five.wide.column .ui.card
+{
+    border: 0px;
+    border-color:  #BCBEC0;
+    margin-left: 2%;
+}
+main .twelve.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img
 {
     background-color:#F6F6F6;
     border: 0px;
     border-color:  #BCBEC0;
     opacity: .6;
+
 }
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card
-{
-    border: 0px;
-    border-color:  #BCBEC0;
-}
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img:hover
+main .twelve.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img:hover
 {
     border: 0px;
     border-color:  #BCBEC0;
     opacity: 1;
 }
 
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .ui.center.aligned.segment
+main .twelve.wide.column .movie-container .ui.grid .five.wide.column .ui.card .ui.center.aligned.segment
 {
     background-color:#441244;
     color: #F6F6F6;
     margin: 0%;
     font-size: 1em;
 }
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image
+main .twelve.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image
 {
     width: 100%;
     height: 25em;
 }
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img
+main .twelve.wide.column .movie-container .ui.grid .five.wide.column .ui.card .image img
 {
     width: 100%;
     height: 100%;
 }
 
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content
+main .twelve.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content
 {
     background-color:#9F9F9F ;
     border-color:  #BCBEC0;
@@ -77,14 +80,14 @@ main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extr
     width: 100%;
 }
 
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content .ui.two.attached.buttons .ui.green.button
+main .twelve.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content .ui.two.attached.buttons .ui.green.button
 {
     background-color:#1C7D69;
     border-bottom-left-radius:1em;
     color: white;
 
 }
-main .ten.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content .ui.two.attached.buttons .ui.red.button
+main .twelve.wide.column .movie-container .ui.grid .five.wide.column .ui.card .extra.center.aligned.content .ui.two.attached.buttons .ui.red.button
 {
     background-color:#B51B09;
     color: white;
