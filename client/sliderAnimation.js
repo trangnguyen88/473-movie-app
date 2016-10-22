@@ -189,17 +189,40 @@ var newItem = function(object) {
     return $item;
 }
 
-var appendmodal = function(movie) {
-
-    var $popUpElement = $('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>' +
-        ' <h1 class="ui header">' + movie.Title +
-        '</hi>' +
-        '<p>' + movie.Year + '</p>' +
-        +'</div></div>');
-    $('head').append($popUpElement);
-    $('.ui.modal').modal('show');
-    modal($popUpElement);
-
+var $popUpElement = $('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>' + 
+   '<div class="ui items">' +
+     '<div class="item">' +
+       '<div class="image">' +
+         '<img src=' + movie.Poster + '>' +
+       '</div>' +
+       '<div class="content">' +
+         '<h1 class="ui header">' + movie.Title + ' (' + movie.Year + ')' +
+         '<div class="sub header">' + 
+         movie.Rated + ' | ' + movie.Runtime + ' | ' + movie.Genre + ' | ' + movie.Released + ' (' + movie.Country + ')' +
+         '</div>' +
+         '</h1>' +
+         '<hr>' +
+         '<div class="description">' +
+           '<p>' + movie.Plot +'</p>' +
+         '</div>' +
+         '<div class="extra">' +
+           '<p><strong>Director</strong>: ' + movie.Director + '</p>' +
+           '<p><strong>Writers</strong>: ' + movie.Writer + '</p>' +
+           '<p><strong>Stars</strong>: ' + movie.Actors + '</p>' +
+         '</div>' +
+       '</div>' +
+       '<h3 class="ui bottom attached header">' +
+       '<p>Metascore: ' + movie.Metascore + '</p>' +
+       '<p>IMDB Rating: ' + movie.imdbRating + '</p>' +
+       '<p>IMDB Votes: ' + movie.imdbVotes + '</p>' +
+       '<p>Awards: ' + movie.Awards + '</p>' +
+       '</h3>' +
+     '</div>' +
+   '</div>' +
+   '</div>');
+   $('head').append($popUpElement.clone());
+   $('.ui.modal').modal('show');
+   modal($popUpElement);
 }
 
 var modal = function($popUpElement) {
