@@ -145,14 +145,14 @@ var sendVoteToServer = function(input, index, parentNode, node) {
             //Update the width of progress bar
             var $temp1 = $temp.children();
             //console.log($temp1.width());
-    
+
             $temp1.width(progressBar +'%');
 
             var $temp2 = $temp1.children();
             $temp2.text(parseInt(progressBar) +'%');
 
             //console.log("DONE");
-            
+
         }
     })
 }
@@ -188,8 +188,8 @@ var newItem = function(object) {
         '</div></div></div>');
     return $item;
 }
-
-var $popUpElement = $('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>' + 
+var appendmodal = function(movie) {
+var $popUpElement = $('<div class = "ui modal"><i class="close icon" id ="modal-button"></i>' +
    '<div class="ui items">' +
      '<div class="item">' +
        '<div class="image">' +
@@ -197,7 +197,7 @@ var $popUpElement = $('<div class = "ui modal"><i class="close icon" id ="modal-
        '</div>' +
        '<div class="content">' +
          '<h1 class="ui header">' + movie.Title + ' (' + movie.Year + ')' +
-         '<div class="sub header">' + 
+         '<div class="sub header">' +
          movie.Rated + ' | ' + movie.Runtime + ' | ' + movie.Genre + ' | ' + movie.Released + ' (' + movie.Country + ')' +
          '</div>' +
          '</h1>' +
