@@ -17,8 +17,8 @@ app.get('/', function(req, res) {
 });
 
 app.get('/movie', function(req, res) {
-    //return all of the movies
-    movieDB.Movie.find(function(err, movies) {
+    //return all of the movies sorted by total votes
+    movieDB.Movie.find({}).sort({ "meta.votes": 'descending' }).exec(function(err, movies) {
         if (err) res.send("error");
         else {
             res.json(movies);
@@ -37,7 +37,6 @@ app.post('/movie/title/vote', function(req, res) {
             console.log("Error on accessing the database");
             return;
         }
-        console.log(result);
         var newVotes = result.meta.votes + 1;
         var newLikes = result.meta.likes;
         if (vote == 'yes') {
