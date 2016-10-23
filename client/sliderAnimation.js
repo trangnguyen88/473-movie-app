@@ -29,29 +29,40 @@ var displayMovies = function(movies) {
 
     //put all elements in array
     generateMore(indexes, arrayOfItems, movies);
+    $("#left-bttn.massive.ui.button").hide();  //Lets disable the left button as we are starting from first 3 elements
 
     $("#left-bttn").on("click", function() {
-        if (start < 1) {
-            start = total - step;
-            end = total;
-
-        } else {
-            start -= step;
-            end -= step;
+    
+        end = start;
+	start = start - step;
+        
+        if(start >= 0){
+            generateMore([start, end], arrayOfItems, movies);
+	}
+        
+        if(start == 0){
+            $("#left-bttn.massive.ui.button").hide();
         }
-        generateMore([start, end], arrayOfItems, movies);
+        if(start >= step){
+            $("#right-bttn.massive.ui.button").show();
+        }
+        
+
     });
     $("#right-bttn").on("click", function() {
-        if (end > total - 1) {
-            start = 0;
-            end = step;
-        } else {
-            start += step;
-            end += step;
+       
+        start = start + step;
+        end = start + step;
+        if(end <= total){
+           generateMore([start, end], arrayOfItems, movies);
         }
-        generateMore([start, end], arrayOfItems, movies);
+        if(end >= total) {
+            $("#right-bttn.massive.ui.button").hide();
+        }
+        if(start >= step){
+            $("#left-bttn.massive.ui.button").show();
+        }
     });
-
 
 }
 
@@ -84,14 +95,17 @@ var generateMore = function(indexes, arrayOfItems, movies) {
 
         $(this).find('.ui .green').on('click', function() {
 
-            var input = { vote: "yes", title: movies[index].movie.Title };
-            sendVoteToServer(input, index, this.closest('.extra'), $(this).parent());
-        });
+            var input = { vote: "yes", title: movies[index].title };
+            sendVoteToServer(input, index, this.closest('.extra'));
+	    $(this).find('.ui .green').context.disabled = true;//disallow user to double click
+        })
 
         $(this).find('.ui .red').on('click', function() {
-            var input = { vote: "no", title: movies[index].movie.Title };
-            sendVoteToServer(input, index, this.closest('.extra'), $(this).parent());
-        });
+            var input = { vote: "no", title: movies[index].title };
+            sendVoteToServer(input, index, this.closest('.extra'));
+            $(this).find('.ui .red').context.disabled = true;//disallow user to double click
+            
+        })
     });
 
 }
